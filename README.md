@@ -56,11 +56,12 @@ Nous allons maintenant porter ce petit programme pour pouvoir l'héberger au sei
 5. Dans le fichier *.vscode/settings.json*, modifiez **~2** en **~3** (le template n'étant pas à jour au 12/01/2021)
 6. Modifiez le fichier afin de récupérer le corps (body) de la requête et le charger en tant qu'image dans ImageSharp ([aide](https://stackoverflow.com/questions/54944607/how-to-retrieve-bytes-data-from-request-body-in-azure-function-app))
     - Pour renvoyer les octets de la nouvelle image en tant que réponse à la requête, utilisez **return new FileContentResult(targetImageBytes, "image/jpeg");**
+    - Ajoutez des paramètres **h** et **w** (au niveau de l'URL) qui permettent à l'appelant de spécifier les dimensions cibles
     - Si vous avez des difficultés, collez le contenu du [fichier préparé](https://github.com/lvovan/AA-Serverless-NET/blob/master/ResizeHttpTrigger-incomplete.cs) qui implémente pour vous les éléments très techniques/tuyaux
 
-7. Complétez les différents TODO
-    - Récupérez les paramètres **w** et **h** de la requête avec **req.Query[*key*]** et utilisez les respectivement comme dimensions cibles pour les largeurs et hauteur de la nouvelle image. Attention au typage!
-    - Les MIME types sont documentés [ici](https://docs.w3cub.com/http/basics_of_http/mime_types/complete_list_of_mime_types.html)
+        - Complétez les différents TODO
+            - Récupérez les paramètres **w** et **h** de la requête avec **req.Query[*key*]** et utilisez les respectivement comme dimensions cibles pour les largeurs et hauteur de la nouvelle image. Attention au typage!
+            - Les MIME types sont documentés [ici](https://docs.w3cub.com/http/basics_of_http/mime_types/complete_list_of_mime_types.html)
 
 
 Récupérez l'adresse de votre fonction depuis le portail Azure en allant sur votre Azure Function, dans la section **Functions**, sélectionnez **ResizeHttpTrigger** et cliquez sur le bouton *Get Function Url* en haut de la page
