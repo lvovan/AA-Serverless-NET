@@ -50,7 +50,7 @@
                 "inputs": {
                     "body": "@body('Get_blob_content')",
                     "function": {
-                        "id": "/subscriptions/43515dcd-cf02-45fd-bc30-f2c80dccc7dc/resourceGroups/trapatou/providers/Microsoft.Web/sites/lvovan-temp-fa/functions/ResizeHttpTrigger"
+                        "id": "/subscriptions/XXX/functions/ResizeHttpTrigger"
                     },
                     "method": "POST",
                     "queries": {
@@ -105,9 +105,9 @@
         "$connections": {
             "value": {
                 "azureblob": {
-                    "connectionId": "/subscriptions/43515dcd-cf02-45fd-bc30-f2c80dccc7dc/resourceGroups/trapatou/providers/Microsoft.Web/connections/azureblob-1",
+                    "connectionId": "/subscriptions/XXX/providers/Microsoft.Web/connections/azureblob-1",
                     "connectionName": "azureblob-1",
-                    "id": "/subscriptions/43515dcd-cf02-45fd-bc30-f2c80dccc7dc/providers/Microsoft.Web/locations/northeurope/managedApis/azureblob"
+                    "id": "/subscriptions/XXX/providers/Microsoft.Web/locations/northeurope/managedApis/azureblob"
                 }
             }
         }
