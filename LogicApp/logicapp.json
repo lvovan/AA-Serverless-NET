@@ -1,0 +1,115 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Create_blob": {
+                "inputs": {
+                    "body": "@body('ResizeHttpTrigger')",
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azureblob']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/datasets/default/files",
+                    "queries": {
+                        "folderPath": "/ir1",
+                        "name": "resize-@{triggerBody()?['Name']}",
+                        "queryParametersSingleEncoded": true
+                    }
+                },
+                "runAfter": {
+                    "ResizeHttpTrigger": [
+                        "Succeeded"
+                    ]
+                },
+                "runtimeConfiguration": {
+                    "contentTransfer": {
+                        "transferMode": "Chunked"
+                    }
+                },
+                "type": "ApiConnection"
+            },
+            "Get_blob_content": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azureblob']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/datasets/default/files/@{encodeURIComponent(encodeURIComponent(triggerBody()?['Id']))}/content",
+                    "queries": {
+                        "inferContentType": true
+                    }
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            },
+            "ResizeHttpTrigger": {
+                "inputs": {
+                    "body": "@body('Get_blob_content')",
+                    "function": {
+                        "id": "/subscriptions/43515dcd-cf02-45fd-bc30-f2c80dccc7dc/resourceGroups/trapatou/providers/Microsoft.Web/sites/lvovan-temp-fa/functions/ResizeHttpTrigger"
+                    },
+                    "method": "POST",
+                    "queries": {
+                        "h": 100,
+                        "w": 100
+                    }
+                },
+                "runAfter": {
+                    "Get_blob_content": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Function"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_blob_is_added_or_modified_(properties_only)": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azureblob']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/datasets/default/triggers/batch/onupdatedfile",
+                    "queries": {
+                        "folderId": "JTJmaXIx",
+                        "maxFileCount": 10
+                    }
+                },
+                "metadata": {
+                    "JTJmaXIx": "/ir1"
+                },
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 3
+                },
+                "splitOn": "@triggerBody()",
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "azureblob": {
+                    "connectionId": "/subscriptions/43515dcd-cf02-45fd-bc30-f2c80dccc7dc/resourceGroups/trapatou/providers/Microsoft.Web/connections/azureblob-1",
+                    "connectionName": "azureblob-1",
+                    "id": "/subscriptions/43515dcd-cf02-45fd-bc30-f2c80dccc7dc/providers/Microsoft.Web/locations/northeurope/managedApis/azureblob"
+                }
+            }
+        }
+    }
+}
