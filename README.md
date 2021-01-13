@@ -56,7 +56,7 @@ Nous allons maintenant porter ce petit programme pour pouvoir l'héberger au sei
 5. Dans le fichier *.vscode/settings.json*, modifiez **~2** en **~3** (le template n'étant pas à jour au 12/01/2021)
 6. Modifiez le fichier afin de récupérer le corps (body) de la requête et le charger en tant qu'image dans ImageSharp ([aide](https://stackoverflow.com/questions/54944607/how-to-retrieve-bytes-data-from-request-body-in-azure-function-app))
     - Pour renvoyer les octets de la nouvelle image en tant que réponse à la requête, utilisez **return new FileContentResult(targetImageBytes, "image/jpeg");**
-    - Ajoutez des paramètres **h** et **w** (au niveau de l'URL) qui permettent à l'appelant de spécifier les dimensions cibles
+    - Ajoutez les paramètres d'URL **h** et **w** qui permettent à l'appelant de spécifier les dimensions cibles
     - Si vous avez des difficultés, collez le contenu du [fichier préparé](https://github.com/lvovan/AA-Serverless-NET/blob/master/ResizeHttpTrigger-incomplete.cs) qui implémente pour vous les éléments très techniques/tuyaux
 
         - Complétez les différents TODO
@@ -70,3 +70,15 @@ Récupérez l'adresse de votre fonction depuis le portail Azure en allant sur vo
 > curl --data-binary "@chaussures_abimees.jpg" -X POST "https://votrefonction.azurewebsites.net/api/ResizeHttpTrigger?w=100&h=100" -v > output.jpeg
 
 9. (optionnel) Changez **AuthorizationLevel.Anonymous** à **AuthorizationLevel.Function** puis récupérez la clé d'API de votre fonction sur le portail. Modifiez ensuite votre requête pour qu'elle s'authentifie avec succès. 
+
+### 5. Intégration avec Logic Apps
+Le web service étant désormais déployé, voyons comment le réutiliser dans un autre scénario. Nous allons pour cela créer une Logic App (également du serverless) qui surveillera le container d'un Blob Storage Account et déclenchera un appel à notre fonction serverless .NET dès qu'un fichier y sera déposé.
+
+1. Depuis le portail Azure, crééz une Logic App
+2. Implémentez la Logic App depuis le concepteur graphique (Designer)
+    - Vous pouvez utiliser directement le connecteur natif Azure Function, ou le connecteur permettant d'effectuer des appels http (optionnel: essayez les deux). Pour passer les paramètres **w** et **h**, utilisez les paramètres *Requêtes* de ces connecteurs
+    - Stockez la sortie de la function dans un nouveau blob situé dans un container différent du même Storage Account et nommez le nouveau blob **resized-*<nom_du_fichier_source>* ** (que se passerait-il si l'on stockait le nouveau fichier dans le même container que l'ancien?)
+    - Utilisez le bouton *Voir le code* pour regarder le fichier décrivant l'application. Notez qu'il s'agit d'un langage déclaratif et non impératif. 
+3. Testez votre application en déposant plusieurs fichiers dans le container du Storage Account
+4. (optionnel) Ajoutez une condition filtrant les fichiers entrant, en s'assurant que le traitement n'ai lieu que s'ils ont pour extension **.jpg**, **.png**, ou **.bmp**.
+5. (optionnel) Le nommage préalablement choisi n'est pas toujours correct car les fichiers créés sont au format jpeg alors que les fichiers sources peuvent être dans un autre format d'image. Pour corriger cela tout en rapprochant alphabétiquement le nom du fichier source et du fichier créé, modifiez le nommage du nouveau fichier ainsi: ***<nom_du_fichier_source>*-resized.jpeg **
