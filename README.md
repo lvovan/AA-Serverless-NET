@@ -72,7 +72,7 @@ Récupérez l'adresse de votre fonction depuis le portail Azure en allant sur vo
 9. (optionnel) Changez **AuthorizationLevel.Anonymous** à **AuthorizationLevel.Function** puis récupérez la clé d'API de votre fonction sur le portail. Modifiez ensuite votre requête pour qu'elle s'authentifie avec succès. 
 
 ### 5. Intégration avec Logic Apps
-Le web service étant désormais déployé, voyons comment le réutiliser dans un autre scénario. Nous allons pour cela créer une Logic App (également du serverless) qui surveillera le container d'un Blob Storage Account et déclenchera un appel à notre fonction serverless .NET dès qu'un fichier y sera déposé.
+Le web service étant désormais déployé, voyons comment le réutiliser dans un autre scénario. Nous allons pour cela créer une Logic App (également du serverless) qui surveillera le container d'un Blob Storage Account et déclenchera un appel à notre Azure Function .NET dès qu'un fichier y sera déposé.
 
 1. Depuis le portail Azure, crééz une Logic App
 2. Implémentez la Logic App depuis le concepteur graphique (Designer)
@@ -81,4 +81,4 @@ Le web service étant désormais déployé, voyons comment le réutiliser dans u
     - Utilisez le bouton *Voir le code* pour regarder le fichier décrivant l'application. Notez qu'il s'agit d'un langage déclaratif et non impératif. 
 3. Testez votre application en déposant plusieurs fichiers dans le container du Storage Account
 4. (optionnel) Ajoutez une condition filtrant les fichiers entrant, en s'assurant que le traitement n'ai lieu que s'ils ont pour extension **.jpg**, **.png**, ou **.bmp**.
-5. (optionnel) Le nommage préalablement choisi n'est pas toujours correct car les fichiers créés sont au format jpeg alors que les fichiers sources peuvent être dans un autre format d'image. Pour corriger cela tout en rapprochant alphabétiquement le nom du fichier source et du fichier créé, modifiez le nommage du nouveau fichier ainsi: ***<nom_du_fichier_source>*-resized.jpeg **
+5. (optionnel) Le nommage préalablement choisi n'est pas toujours correct car les fichiers créés sont au format jpeg alors que les fichiers sources peuvent être dans un autre format d'image. Pour corriger cela tout en rapprochant alphabétiquement le nom du fichier source et du fichier créé, modifiez le nommage du nouveau fichier ainsi: ***<nom_du_fichier_source_sans_extension>*-resized.jpeg **
