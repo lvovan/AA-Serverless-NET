@@ -2,7 +2,7 @@
 
 ### Pré-requis
 1. Installer
-    - [.NET Core](https://dotnet.microsoft.com/download/dotnet-core)
+    - [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core)
     - [Visual Studio Code](https://code.visualstudio.com/)
     - [Azure Functions extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 
