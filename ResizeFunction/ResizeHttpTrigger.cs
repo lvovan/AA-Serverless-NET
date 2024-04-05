@@ -7,9 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-// using Newtonsoft.Json;
-// using SixLabors.ImageSharp;
-// using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace Company.Function
 {
@@ -22,42 +21,52 @@ namespace Company.Function
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query['name'];
-            // int w = req.Query["w"]; //récupérer le paramètre w
-            // int h = req.Query["h"]; //récupérer le paramètre h
+            int w = 0;
+            int h = 0;
+            
+            try
+            {
+                w = Int32.Parse(req.Query["w"]); //récupérer le paramètre w
+                h = Int32.Parse(req.Query["h"]); //récupérer le paramètre h
+                // if (w < 0)
+                // {
+                //     throw FormatException("No negative number for width");
+                // }
+                // if (h < 0)
+                // {
+                //     throw FormatException("No negative number for heigth");
+                // }
+            }
+            catch (FormatException e)
+            {
+                log.LogInformation($"Exception caught : {e}");
+            }
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            log.LogInformation($"Request body is :{requestBody}");
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            byte[]  targetImageBytes;
+            using(var  msInput = new MemoryStream())
+            {
+                // Récupère le corps du message en mémoire
+                await req.Body.CopyToAsync(msInput);
+                msInput.Position = 0;
 
-            // byte[]  targetImageBytes;
-            // using(var  msInput = new MemoryStream())
-            // {
-            //     // Récupère le corps du message en mémoire
-            //     await req.Body.CopyToAsync(msInput);
-            //     msInput.Position = 0;
+                // Charge l'image       
+                using (var image = Image.Load(msInput)) 
+                {
+                    // Effectue la transformation
+                    image.Mutate(x => x.Resize(w, h));
 
-            //     // Charge l'image       
-            //     using (var image = Image.Load(msInput)) 
-            //     {
-            //         // Effectue la transformation
-            //         image.Mutate(x => x.Resize(w, h));
+                    // Sauvegarde en mémoire               
+                    using (var msOutput = new MemoryStream())
+                    {
+                        image.SaveAsJpeg(msOutput);
+                        targetImageBytes = msOutput.ToArray();
+                    }
+                }
+            }
 
-            //         // Sauvegarde en mémoire               
-            //         using (var msOutput = new MemoryStream())
-            //         {
-            //             image.SaveAsJpeg(msOutput);
-            //             targetImageBytes = msOutput.ToArray();
-            //         }
-            //     }
-            // }
+            log.LogInformation("End of the Azure function !");
 
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
-            return new OkObjectResult(responseMessage);
+            return new FileContentResult(targetImageBytes, "image/jpeg");
         }
     }
 }
