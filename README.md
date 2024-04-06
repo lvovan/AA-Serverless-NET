@@ -41,4 +41,10 @@ Après adaptation sur **WSL2** (Debian) avec la commande :
 
 A noter qu'il faut remplacer localhost par `$(hostname).local` pour accéder aux port de l'hôte depuis WSL.
 
+Ici le lien vers un ZIP qui contient la vidéo démonstration des éléments ci-dessus : https://drive.google.com/file/d/1cW_6Its2cbYUiFWoxDPJ5P5KO7SXj48l/view?usp=drive_link
+
 ### 5. Intégration avec Logic Apps
+
+La difficultée principale rencontrée ici est qu'il fallait désactiver la segmentation des données au niveau de la requête HTTP.
+
+Le lien vers la vidéo de test : https://drive.google.com/file/d/1rHIvGF-UcMDRvtS4qOoawA7Z5_r0JNPu/view?usp=sharing 
