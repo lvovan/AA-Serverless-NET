@@ -105,21 +105,12 @@ Le web service étant désormais déployé, voyons comment le réutiliser dans u
 ### 6. Rendu - 17 avril 2025
 Le TP sera noté et rendu de la manière suivante:
  - Par binôme ou trinôme
- - Pensez à [bien gérer les exceptions](https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions)
+ - Pensez à [bien gérer les différents types exceptions](https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions) en pensant à tous les cas possibles et aux [codes de réponse http](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) adéquats
+ - Rendez un code de qualité
  - **Bien suivre les instructions** car une partie de l'évaluation est automatisée.
  - Le rendu doit s'effectuer comme décrit ci-dessous.
-    - Envoi du rendu par mail:
-        - Destinataire: mon adresse ...@centralesupelec.fr
-        - Sujet: `TPDOTNET` suivi de vos noms (ex: `TPDOTNET - alice, bob, charles`)
-        - CC: Les membres du binôme ou trinôme
-        - En pj. l'unique fichier de votre Azure Functions (`ResizeHttpTrigger.cs`)
-        - Corps du message:
-            1. L'URL https de votre fonction
-            2. Le lien vers votre Logic App (celle qui apparaît dans la barre d'adresse du navigateur quand vous êtes sur votre Logic App)
-            3. (bonus) les liens vers les vidéos
-               
-    - Les bonus sont soumis sous forme de vidéo Youtube [unlisted](https://support.google.com/youtube/answer/157177?sjid=4795422317307104878-EU#unlisted&zippy=%2Cunlisted-videos) faisant au plus 3 minutes chacune (le plus court le mieux). Si nécessaire, exécutez le code localement sur votre poste ou augmentez le nombre de CPU de votre Codespace pour mieux mettre en avant l'amélioration des performances.
+    - Envoi du rendu via le [formulaire de réponse](https://forms.microsoft.com)              
+    - Les bonus sont soumis sous forme de vidéo Youtube [unlisted](https://support.google.com/youtube/answer/157177?sjid=4795422317307104878-EU#unlisted&zippy=%2Cunlisted-videos) faisant *au plus* 3 minutes chacune (le plus court le mieux). Les autres formats de fourniture vidéo ne seront pas acceptés. Si nécessaire, exécutez le code localement sur votre poste ou augmentez le nombre de CPU de votre Codespace pour mieux mettre en avant l'amélioration des performances.
         - *Bonus 1* : une vidéo démontrant le gain de performance obtenu par la parallélisation sur le traitement local (section 3.3)
         - *Bonus 2* : une vidéo démontrant le fonctionnement de la Logic App lisant des images depuis le Blob Storage (dépôt de plusieurs fichiers, détails du run de la Logic App, apparition des fichiers traités dans le Blob Storage)
-    
   _Note:_ Vous pouvez utiliser PowerPoint pour [capturer facilement votre écran](https://www.youtube.com/watch?v=ZCd9fO72vCg). Vous pouvez partager la vidéo sur Teams.
