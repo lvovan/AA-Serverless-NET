@@ -109,8 +109,9 @@ Le TP sera noté et rendu de la manière suivante:
  - Rendez un code de qualité
  - **Bien suivre les instructions** car une partie de l'évaluation est automatisée.
  - Le rendu doit s'effectuer comme décrit ci-dessous.
-    - Envoi du rendu via le [formulaire de réponse](https://forms.microsoft.com)              
-    - Les bonus sont soumis sous forme de vidéo Youtube [unlisted](https://support.google.com/youtube/answer/157177?sjid=4795422317307104878-EU#unlisted&zippy=%2Cunlisted-videos) faisant *au plus* 3 minutes chacune (le plus court le mieux). Les autres formats de fourniture vidéo ne seront pas acceptés. Si nécessaire, exécutez le code localement sur votre poste ou augmentez le nombre de CPU de votre Codespace pour mieux mettre en avant l'amélioration des performances.
-        - *Bonus 1* : une vidéo démontrant le gain de performance obtenu par la parallélisation sur le traitement local (section 3.3)
-        - *Bonus 2* : une vidéo démontrant le fonctionnement de la Logic App lisant des images depuis le Blob Storage (dépôt de plusieurs fichiers, détails du run de la Logic App, apparition des fichiers traités dans le Blob Storage)
-  _Note:_ Vous pouvez utiliser PowerPoint pour [capturer facilement votre écran](https://www.youtube.com/watch?v=ZCd9fO72vCg). Vous pouvez partager la vidéo sur Teams.
+    - Envoi du rendu via le [formulaire de réponse](https://forms.microsoft.com)
+    - _TODO_ *Vidéo obligatoire* : une vidéo démontrant le fonctionnement de la Logic App lisant des images depuis le Blob Storage (dépôt de plusieurs fichiers, détails du run de la Logic App, apparition des fichiers traités dans le Blob Storage). Des explications sur l'application et son fonctionnement sont attendues pendant le déroulement de la vidéo (i.e., pas de vidéo muette sauf dérogation)
+    - Les vidéos sous soumises sur Youtube [unlisted](https://support.google.com/youtube/answer/157177?sjid=4795422317307104878-EU#unlisted&zippy=%2Cunlisted-videos) *uniquement*. Elles doivent faire  *au plus* 3 minutes chacune (le plus court le mieux). Les autres formats de fourniture vidéo seront ignorés. Si nécessaire, exécutez le code localement sur votre poste ou augmentez le nombre de CPU de votre Codespace pour mieux mettre en avant l'amélioration des performances.
+     - *Bonus* : une vidéo démontrant le gain de performance obtenu par la parallélisation sur le traitement local (section 3.3)
+
+  _Note:_ Vous pouvez utiliser PowerPoint pour [capturer facilement votre écran](https://www.youtube.com/watch?v=ZCd9fO72vCg).
